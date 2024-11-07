@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Design with Image Button Links</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFFFFF;
+        }
+
+        .text-box {
+            width: 300px;
+            padding: 20px;
+            background-color: #005C54;
+            color: #FFFFFF;
+            text-align: center;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 200px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 500px;
+        }
+
+        /* Common button style */
+        .button {
+            width: 300px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Style for Button 1 */
+        .button1 {
+            background-image: url('mlogo.png'); /* ใส่ URL ของรูปภาพที่ต้องการสำหรับปุ่มแรก */
+        }
+
+        /* Style for Button 2 */
+        .button2 {
+            background-image: url('plogo.png'); /* ใส่ URL ของรูปภาพที่ต้องการสำหรับปุ่มที่สอง */
+        }
+
+        .button:hover {
+            opacity: 0.9; /* เพิ่มเอฟเฟกต์ hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-box">โปรดเลือกอุปกรณ์</div>
+
+    <div class="button-container">
+        <a href="todo_mobile.html" class="button button1"></a>
+        <a href="todo.html" class="button button2"></a>
+    </div>
+
+</body>
+</html>
