@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="home.png" type="image/png">
+    <title>Don't Forget Me</title>
+    <style>
+        /* ตั้งค่าพื้นฐานสำหรับหน้าเว็บ */
+        body {
+            background-color: #F4F4F4;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url(bg3.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* สไตล์สำหรับหัวข้อ */
+        h1 {
+            color: #333;
+            margin: 20px 0;
+            font-size: 36px;
+        }
+
+        /* ส่วนแถบเมนูด้านบน */
+        .header {
+            background-color: #00C96B;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+
+        /* กล่องการ์ด */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            flex: 1;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            text-decoration: none;
+        }
+
+        .card button {
+            background-color: #00C96B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 11px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card button:hover {
+            background-color: #008a50;
+        }
+
+        /* สไตล์สำหรับ footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+        }
+                /* From Uiverse.io by alexroumi */ 
+        button {
+        padding: 15px 25px;
+        border: unset;
+        border-radius: 15px;
+        color: #212121;
+        z-index: 1;
+        background: #e8e8e8;
+        position: relative;
+        font-weight: 1000;
+        font-size: 17px;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+        overflow: hidden;
+        }
+
+        button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+        }
+
+        button:hover {
+        color: #e8e8e8;
+        }
+
+        button:hover::before {
+        width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Don't Forgot Me</h1>
+    </div>
+
+    <!-- Card Container -->
+    <div class="container">
+        <!-- Time Setting Card -->
+        <div class="card">
+            <img src="image.png" alt="Clock">
+            <h3>ตั้งเวลา</h3>
+            <a href="todo1.html">
+                <button>Click</button>
+            </a>
+        </div>
+
+        <!-- Notes Card -->
+        <div class="card">
+            <img src="note.png" alt="Notes">
+            <h3>โน๊ต</h3>
+            <a href="note.html">
+                <button>Click</button>
+            </a>
+        </div>
+
+        <!-- Brain Food Card -->
+        <div class="card">
+            <img src="recipe.png" alt="Brain Food">
+            <h3>อาหารบำรุงสมอง</h3>
+            <a href="Foodbrain.html">
+                <button>Click</button>
+            </a>
+        </div>
+        
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>จัดทำโดย นาย ธัชพนธ์  ถาวรชีพ นาย วัฒนา ถิ่นถาน</p>
+    </div>
+
+</body>
+</html>

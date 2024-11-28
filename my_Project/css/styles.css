@@ -1,0 +1,275 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5;
+  background: linear-gradient(to right, #6a11cb, #2575fc); 
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #2c3e50;
+}
+input[type="text"], input[type="datetime-local"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+input[type="text"]:focus, input[type="datetime-local"]:focus {
+  border-color: #5512d1;
+}
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #240250;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #40105c;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+li {
+  background-color: #f9fafb;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.delete-btn {
+  background-color: #e13ce7;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+.sidebar {
+  width: 70px; /* ความกว้างเริ่มต้น */
+  height: 100vh;
+  background-color: #c816df;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s; /* ทำให้การขยาย Sidebar นุ่มนวล */
+  overflow: hidden;
+}
+
+.sidebar:hover {
+  width: 200px; /* ขยาย Sidebar เมื่อ Hover */
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.sidebar-link:hover {
+  background-color: #575757;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  transition: margin-right 0.3s; /* ทำให้การขยับนุ่มนวล */
+}
+
+.text {
+  font-size: 18px;
+  opacity: 0; /* ซ่อนข้อความในเริ่มต้น */
+  transition: opacity 0.3s; /* ทำให้ข้อความค่อยๆ ปรากฏ */
+}
+
+.sidebar:hover .text {
+  opacity: 1; /* แสดงข้อความเมื่อ Hover ที่ Sidebar */
+}
+
+/* ปรับ content เมื่อ Sidebar ขยาย */
+.todo-container {
+  margin-left: 70px;
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+.sidebar:hover ~ .content {
+  margin-left: 200px; /* ขยับเนื้อหาเมื่อ Sidebar ขยาย */
+}
+/* Modal Style */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+.task-note-container {
+  position: relative;
+  margin-top: 5px;
+}
+
+.task-note {
+  max-height: 100px; /* กำหนดความสูงสูงสุด */
+  overflow-y: auto; /* เปิด Scrollbar */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #333;
+  display: none; /* ซ่อนข้อความเริ่มต้น */
+}
+.task-note-container .toggle-note-btn {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.task-note-container .toggle-note-btn i {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+.task-note-container .toggle-note-btn:hover i {
+  color: #0056b3;
+}
+.toggle-note-btn {
+  font-size: 0.9rem;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-note-btn:hover {
+  text-decoration: underline;
+}
+
+.toggle-note-btn {
+  font-size: 1rem;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-note-btn i {
+  font-size: 1.2rem;
+}
+
+.toggle-note-btn:hover i {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  .task-form input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .task-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-list button {
+    margin-top: 5px;
+    align-self: flex-end;
+  }
+}
+
+/* สไตล์เพิ่มเติมสำหรับหน้าจอเล็กมาก (มือถือขนาดเล็ก) */
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+/* Task ที่ทำเสร็จแล้ว */
+.task-list li.completed {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  text-decoration: line-through;
+  color: #155724;
+}
+
+
