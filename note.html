@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="note.png" type="image/png">
+    <title>ระบบเขียนโน้ต</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            background-image: url(img/Printable-Note-Pages-10-791x1024.jpg);
+            background-repeat: no-repeat;
+            background-size: 2000px 1500px;
+        }
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .note {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .note p {
+            margin: 0;
+        }
+        .note button {
+            background-color: #dc3545;
+            margin-top: 10px;
+        }
+        /* สำหรับ Sidebar */
+        .sidebar {
+            width: 70px; /* ความกว้างเริ่มต้น */
+            height: 100vh;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: width 0.3s; /* ทำให้การขยาย Sidebar นุ่มนวล */
+            overflow: hidden;
+        }
+
+        .sidebar:hover {
+            width: 200px; /* ขยาย Sidebar เมื่อ Hover */
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-link:hover {
+            background-color: #575757;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            transition: margin-right 0.3s; /* ทำให้การขยับนุ่มนวล */
+        }
+
+        .text {
+            font-size: 18px;
+            opacity: 0; /* ซ่อนข้อความในเริ่มต้น */
+            transition: opacity 0.3s; /* ทำให้ข้อความค่อยๆ ปรากฏ */
+        }
+
+        .sidebar:hover .text {
+            opacity: 1; /* แสดงข้อความเมื่อ Hover ที่ Sidebar */
+        }
+
+        /* ปรับ content เมื่อ Sidebar ขยาย */
+        .content {
+            margin-left: 70px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar:hover ~ .content {
+            margin-left: 200px; /* ขยับเนื้อหาเมื่อ Sidebar ขยาย */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="index.html" class="sidebar-link">
+            <img src="home.png" alt="home" class="icon">
+            <span class="text">home</span>
+        </a>
+        <a href="todo1.html" class="sidebar-link">
+            <img src="image.png" alt="time" class="icon">
+            <span class="text">ตั้งเวลา</span>
+        </a>
+        <a href="Foodbrain.html" class="sidebar-link">
+            <img src="recipe.png" alt="recipe" class="icon">
+            <span class="text">อาหารบำรุงสมอง</span>
+        </a>
+        
+    </div>
+   
+    
+    <div class="content">
+        <h1>ระบบเขียนโน้ต</h1>
+        <input id="noteTitle" type="text" placeholder="หัวเรื่อง..." />
+        <textarea id="noteInput" placeholder="เขียนเนื้อหาของคุณที่นี่..."></textarea>
+        <button onclick="addNote()">เพิ่มโน้ต</button>
+        <div id="notesContainer"></div>
+    </div>
+    
+    <script>
+        // ฟังก์ชันโหลดโน้ตจาก LocalStorage
+        function loadNotes() {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notes.forEach(note => {
+                createNoteElement(note.title, note.text, note.timestamp);
+            });
+        }
+    
+        // ฟังก์ชันบันทึกโน้ตไปยัง LocalStorage
+        function saveNotes() {
+            const notes = [];
+            document.querySelectorAll('.note').forEach(noteElement => {
+                const title = noteElement.querySelector('.note-title').textContent;
+                const text = noteElement.querySelector('.note-content').textContent;
+                const timestamp = noteElement.querySelector('.timestamp').textContent;
+                notes.push({ title, text, timestamp });
+            });
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+    
+        // ฟังก์ชันสร้าง Element สำหรับโน้ต
+        function createNoteElement(title, text, timestamp = null) {
+            const notesContainer = document.getElementById('notesContainer');
+            const note = document.createElement('div');
+            note.className = 'note';
+    
+            // สร้างหัวเรื่อง
+            const noteTitle = document.createElement('h2');
+            noteTitle.className = 'note-title';
+            noteTitle.textContent = title || 'ไม่มีหัวเรื่อง';
+            note.appendChild(noteTitle);
+    
+            // สร้างเนื้อหา (เริ่มต้นซ่อน)
+            const noteContent = document.createElement('p');
+            noteContent.className = 'note-content';
+            noteContent.textContent = text;
+            noteContent.style.display = 'none'; // ซ่อนข้อความเริ่มต้น
+            note.appendChild(noteContent);
+    
+            // แสดงวันที่และเวลา
+            const noteTimestamp = document.createElement('div');
+            noteTimestamp.className = 'timestamp';
+            noteTimestamp.textContent = timestamp || new Date().toLocaleString();
+            note.appendChild(noteTimestamp);
+    
+            // ปุ่มแสดง/ซ่อน
+            const toggleButton = document.createElement('button');
+            toggleButton.textContent = 'แสดง';
+            toggleButton.onclick = function () {
+                if (noteContent.style.display === 'none') {
+                    noteContent.style.display = 'block'; // แสดงข้อความ
+                    toggleButton.textContent = 'ซ่อน';
+                } else {
+                    noteContent.style.display = 'none'; // ซ่อนข้อความ
+                    toggleButton.textContent = 'แสดง';
+                }
+            };
+            note.appendChild(toggleButton);
+    
+            // ปุ่มลบ
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'ลบ';
+            deleteButton.onclick = function () {
+                notesContainer.removeChild(note);
+                saveNotes(); // บันทึกโน้ตใหม่หลังจากลบ
+            };
+            note.appendChild(deleteButton);
+    
+            notesContainer.appendChild(note);
+        }
+    
+        // ฟังก์ชันสำหรับการเพิ่มโน้ต
+        function addNote() {
+            const noteTitle = document.getElementById('noteTitle');
+            const noteInput = document.getElementById('noteInput');
+    
+            if (noteInput.value.trim() !== '') {
+                const timestamp = new Date().toLocaleString(); // เพิ่มเวลาที่เขียนโน้ต
+                createNoteElement(noteTitle.value.trim(), noteInput.value.trim(), timestamp);
+                saveNotes(); // บันทึกโน้ตใหม่หลังจากเพิ่ม
+                noteTitle.value = ''; // ล้างข้อความใน input หัวเรื่อง
+                noteInput.value = ''; // ล้างข้อความใน textarea
+            } else {
+                alert('กรุณาเขียนเนื้อหาของโน้ตก่อน!');
+            }
+        }
+    
+        // โหลดโน้ตเมื่อเริ่มต้น
+        window.onload = loadNotes;
+    </script>
+    
+    
+</body>
+</html>
